@@ -101,7 +101,50 @@ npm run dev
 Default frontend API target:
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000
+VITE_API_BASE_URL=/api
+```
+
+For local development, Vite proxies `/api/*` to `http://localhost:5000/*`, so keeping `/api`
+works with both local and Vercel deployments.
+
+## Deploy To Vercel
+
+This repo is configured so Vercel will:
+
+- build the React frontend from `frontend/`
+- serve the built site from `frontend/dist`
+- expose serverless API routes at `/api/bfhl` and `/api/health`
+
+### Before Deploying
+
+Set these environment variables in your Vercel project:
+
+```env
+FULL_NAME=yourfullname
+DOB_DDMMYYYY=17091999
+EMAIL_ID=yourname@srmist.edu.in
+COLLEGE_ROLL_NUMBER=RA2211003010000
+```
+
+`VITE_API_BASE_URL` is optional on Vercel because the frontend defaults to `/api`.
+
+### Deploy Steps
+
+```bash
+npm i -g vercel
+vercel
+```
+
+When prompted:
+
+- link this folder as the Vercel project root
+- keep the detected settings from `vercel.json`
+- add the backend identity environment variables in the Vercel dashboard if you have not already
+
+To push a production deployment later:
+
+```bash
+vercel --prod
 ```
 
 ## API

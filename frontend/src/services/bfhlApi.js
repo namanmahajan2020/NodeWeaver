@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "/api").replace(/\/$/, "");
 
 export async function submitBfhlData(data) {
   const response = await fetch(`${API_BASE_URL}/bfhl`, {
@@ -24,4 +24,3 @@ export async function submitBfhlData(data) {
 
   return response.json();
 }
-
